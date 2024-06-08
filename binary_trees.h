@@ -21,6 +21,18 @@ typedef struct binary_tree_s
 	struct binary_tree_s *right;
 } binary_tree_t;
 
+/**
+ * struct depth_level_storage - Saves the depth levels in linked list
+ *
+ * @depth: the depth
+ * @next: the link to next node
+ */
+typedef struct depth_level_storage
+{
+	int depth;
+	struct depth_level_storage *next;
+} depth_ls;
+
 void binary_tree_print(const binary_tree_t *);
 typedef struct binary_tree_s bst_t;
 typedef struct binary_tree_s avl_t;
@@ -41,6 +53,7 @@ size_t binary_tree_leaves(const binary_tree_t *tree);
 size_t binary_tree_nodes(const binary_tree_t *tree);
 int binary_tree_balance(const binary_tree_t *tree);
 int binary_tree_is_full(const binary_tree_t *tree);
+int binary_tree_is_perfect(const binary_tree_t *tree);
 
 
 #endif /* _BINARY_TREES_H_ */
