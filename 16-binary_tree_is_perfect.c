@@ -1,6 +1,6 @@
 #include "binary_trees.h"
 
-void free_linked_list(depth_ls *);
+void free_linked_list(depth_ls **);
 int compare_leaves(depth_ls *);
 void add_depth_end(int, depth_ls **);
 int is_perfect_tree_function(const binary_tree_t *, int, depth_ls **);
@@ -17,7 +17,7 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 	int is_perfect;
 
 	if (!tree)
-		return (1);
+		return (0);
 	head = NULL;
 
 	is_perfect = is_perfect_tree_function(tree, 0, &head) == 0 ?
@@ -25,10 +25,10 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 
 	if (is_perfect && compare_leaves(head))
 	{
-		free_linked_list(head);
+		free_linked_list(&head);
 		return (1);
 	}
-	free_linked_list(head);
+	free_linked_list(&head);
 	return (0);
 }
 
@@ -124,14 +124,15 @@ int compare_leaves(depth_ls *head)
  * Return: void
  */
 
-void free_linked_list(depth_ls *head)
+void free_linked_list(depth_ls **head)
 {
 	depth_ls *temp;
 
-	while (head != NULL)
+	while (*head != NULL)
 	{
-		temp = head;
-		head = head->next;
+		temp = *head;
+		*head = (*head)->next;
 		free(temp);
 	}
+	*head = NULL;
 }
